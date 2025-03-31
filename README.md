@@ -45,51 +45,44 @@ A system that extracts event information from calendar images using OCR and an o
 ### Basic Usage
 
 ```
-python main.py
+python main.py cal.png
 ```
 
-This will process the default images (`cal.png`, `cal2.png`, `cal3.png`) and save the results to `calendar_events.json`.
+This will process the specified calendar image (`cal.png`) and save the results to `cal_events.json`.
 
 ### Advanced Usage
 
 ```
-python main.py --images image1.png image2.png --output results.json --model llama3
+python main.py cal.png --output results.json --model llama3
 ```
 
 Options:
-- `--images`, `-i`: Paths to calendar images to process
-- `--output`, `-o`: Output JSON file path (default: calendar_events.json)
+- `--output`, `-o`: Output JSON file path (default: [image_name]_events.json)
 - `--model`, `-m`: LLM model name to use with Ollama (default: llama3)
-- `--all`, `-a`: Process all PNG files in the current directory
 
 ## Output Format
 
-The output JSON file contains a dictionary with image paths as keys and lists of event objects as values:
+The output JSON file contains an array of event objects:
 
 ```json
-{
-  "cal.png": [
-    {
-      "title": "Team Meeting",
-      "description": "Weekly status update",
-      "date": "2023-04-15",
-      "time": "10:00 AM - 11:00 AM",
-      "repeating": true,
-      "repeat_schedule": "Weekly on Tuesdays"
-    },
-    {
-      "title": "Dentist Appointment",
-      "description": "",
-      "date": "2023-04-18",
-      "time": "2:30 PM",
-      "repeating": false,
-      "repeat_schedule": ""
-    }
-  ],
-  "cal2.png": [
-    // Events from cal2.png
-  ]
-}
+[
+  {
+    "title": "Team Meeting",
+    "description": "Weekly status update",
+    "date": "2023-04-15",
+    "time": "10:00 AM - 11:00 AM",
+    "repeating": true,
+    "repeat_schedule": "Weekly on Tuesdays"
+  },
+  {
+    "title": "Dentist Appointment",
+    "description": "",
+    "date": "2023-04-18",
+    "time": "2:30 PM",
+    "repeating": false,
+    "repeat_schedule": ""
+  }
+]
 ```
 
 ## Limitations
